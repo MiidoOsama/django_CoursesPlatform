@@ -1,0 +1,124 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- START SECTION TOP -->
+<section class="section-top">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <h1>Sign Up</h1>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li> / Sign Up</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END SECTION TOP -->
+
+<!-- START REGISTER FORM -->
+<div class="contact_area section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="contact" style="background: #f9f9f9; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <h3 class="text-center mb-4" style="font-family: 'Jost', sans-serif; font-weight: 700; color: #1a1a1a;">Create Account</h3>
+                    <p class="text-center text-muted mb-4">Join our community and start your learning journey!</p>
+
+                    {% if messages %}
+                        <div class="messages mb-4">
+                            {% for message in messages %}
+                                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form class="form" method="post" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-12 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">Username</label>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.username.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">First Name</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.first_name.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">Last Name</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.last_name.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">Role</label>
+                                {{ form.role }}
+                                {% if form.role.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.role.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">Password</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.password1.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label style="font-weight: 600; margin-bottom: 5px;">Confirm Password</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger mt-1">
+                                        {% for error in form.password2.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-12 text-center mt-4">
+                                <button type="submit" class="btn_one w-100" style="padding: 14px; font-weight: 600; border-radius: 5px; cursor: pointer; transition: 0.3s;">Create Account</button>
+                            </div>
+                            <div class="col-md-12 text-center mt-4">
+                                <p class="mb-0 text-muted">Already have an account? <a href="{% url 'login' %}" style="color: #ff5a1f; font-weight: 600; text-decoration: none;">Sign In</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END REGISTER FORM -->
+{% endblock %}
