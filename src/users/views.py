@@ -22,7 +22,6 @@ def user_login(request):
     context = {
         'form':form
     }
-
     return render (request , 'users/login.html' , context)
 
 
@@ -47,5 +46,6 @@ def user_registeration(request):
     context = {
         'form': form
     }
-
     return render( request , 'users/register.html' , context)
+
+
