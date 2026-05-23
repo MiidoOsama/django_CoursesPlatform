@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- START SECTION TOP -->
+<section class="section-top">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <h1>My Profile</h1>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li> / My Profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END SECTION TOP -->
+
+<!-- START PROFILE -->
+<div class="contact_area section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="contact" style="background: #f9f9f9; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    
+                    {% if messages %}
+                        <div class="messages mb-4">
+                            {% for message in messages %}
+                                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Profile Header -->
+                    <div class="text-center mb-4">
+                        <div class="profile-avatar" style="width: 120px; height: 120px; background: linear-gradient(135deg, #ff5a1f, #ff8c42); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fa fa-user" style="font-size: 50px; color: white;"></i>
+                        </div>
+                        <h3 style="font-family: 'Jost', sans-serif; font-weight: 700; color: #1a1a1a;">{{ user.get_full_name|default:user.username }}</h3>
+                        <p class="text-muted">{{ user.email }}</p>
+                        <span class="badge" style="background: #ff5a1f; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px;">{{ user.role|default:"Student" }}</span>
+                    </div>
+
+                    <!-- Profile Info -->
+                    <div class="profile-info mt-4">
+                        <h4 style="font-family: 'Jost', sans-serif; font-weight: 600; color: #1a1a1a; margin-bottom: 20px; border-bottom: 2px solid #ff5a1f; padding-bottom: 10px;">Account Information</h4>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">Username</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.username }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">Email</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.email }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">First Name</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.first_name|default:"-" }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">Last Name</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.last_name|default:"-" }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">Role</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.role|default:"Student" }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #666; font-size: 14px;">Date Joined</label>
+                                <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ user.date_joined|date:"F d, Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-12 text-center mt-4">
+                        <a href="{% url 'logout' %}" style="color: #dc3545; font-weight: 600; text-decoration: none;">
+                            <i class="fa fa-sign-out"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PROFILE -->
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- START SECTION TOP -->
+		<section class="section-top">
+			<div class="container">
+				<div class="col-lg-10 offset-lg-1 text-center">
+					<div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+						<h1>All Course</h1>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li> / Course</li>
+						</ul>
+					</div><!-- //.HERO-TEXT -->
+				</div><!--- END COL -->
+			</div><!--- END CONTAINER -->
+		</section>	
+		<!-- END SECTION TOP -->
+		
+		<!-- START COURSE -->
+		<section class="home_course section-padding">
+			<div class="container">
+				{% if courses %}
+				<div class="row">
+					{% for course in courses %}
+					<div class="col-lg-4 col-sm-6 col-xs-12">
+						<div class="single_course">
+							<div class="single_c_img">
+								{% if course.image %}
+								<img src="{{ course.image.url }}" class="img-fluid" alt="course-image" />
+								{% else %}
+								<img src="{% static 'assets/img/course/1.png' %}" class="img-fluid" alt="course-image" />
+								{% endif %}
+								<span>{{ course.name }}</span>
+							</div>
+							<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+							<h4><a href="#">{{ course.name }}</a></h4>
+							<p><span class="ti-user"></span> {{ course.students.count }} Students</p>
+							<p><span class="ti-user"></span> {{ course.teacher.get_full_name|default:course.teacher.username }}</p>
+						</div>
+					</div><!-- END COL -->
+					{% endfor %}
+				</div><!--- END ROW -->
+				{% else %}
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h3>No courses found</h3>
+						p>You haven't enrolled in any courses yet.</p>
+					</div>
+				</div>
+				{% endif %}
+			</div><!--- END CONTAINER -->
+		</section>
+		<!-- END COURSE -->
+{% endblock %}
