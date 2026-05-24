@@ -18,7 +18,7 @@ class Courses(models.Model):
 class Lesson(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
-    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='lessons')
 
     def __str__(self):
         return self.title

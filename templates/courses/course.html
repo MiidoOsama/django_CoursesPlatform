@@ -9,7 +9,7 @@
 					<div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
 						<h1>All Course</h1>
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{% url 'index' %}">Home</a></li>
 							<li> / Course</li>
 						</ul>
 					</div><!-- //.HERO-TEXT -->
@@ -35,7 +35,7 @@
 								<span>{{ course.name }}</span>
 							</div>
 							<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-							<h4><a href="#">{{ course.name }}</a></h4>
+							<h4><a href="{% url 'lesson_list' course.id %}">{{ course.name }}</a></h4>
 							<p><span class="ti-user"></span> {{ course.students.count }} Students</p>
 							<p><span class="ti-user"></span> {{ course.teacher.get_full_name|default:course.teacher.username }}</p>
 						</div>

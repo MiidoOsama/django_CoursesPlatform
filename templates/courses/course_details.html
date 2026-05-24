@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- START SECTION TOP -->
+<section class="section-top">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <h1>{{ lesson.title }}</h1>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'my_courses' %}"> / Courses</a></li>
+                    <li><a href="{% url 'lesson_list' course.id %}"> / {{ course.name }}</a></li>
+                    <li> / {{ lesson.title }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END SECTION TOP -->
+
+<!-- START LESSON DETAIL -->
+<section class="contact_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="contact" style="background: #f9f9f9; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <h2 style="font-family: 'Jost', sans-serif; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; border-bottom: 2px solid #ff5a1f; padding-bottom: 10px;">
+                        <i class="fa fa-book" style="color: #ff5a1f;"></i> {{ lesson.title }}
+                    </h2>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <span style="display: inline-block; background: #ff5a1f; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px;">
+                            Course: {{ course.name }}
+                        </span>
+                    </div>
+
+                    <div style="background: white; padding: 25px; border-radius: 8px; border-left: 4px solid #ff5a1f; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <h4 style="font-family: 'Jost', sans-serif; font-weight: 600; color: #1a1a1a; margin-bottom: 15px;">Description</h4>
+                        <p style="color: #666; line-height: 1.8; font-size: 16px;">{{ lesson.description }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="{% url 'lesson_list' course.id %}" class="btn_one" style="padding: 12px 30px;">
+                            <i class="fa fa-arrow-left"></i> Back to Lessons
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="contact" style="background: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <h3 style="font-family: 'Jost', sans-serif; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; border-bottom: 2px solid #ff5a1f; padding-bottom: 10px;">
+                        Course Information
+                    </h3>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-weight: 600; color: #666; font-size: 14px;">Course Name</label>
+                        <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ course.name }}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-weight: 600; color: #666; font-size: 14px;">Teacher</label>
+                        <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ course.teacher.get_full_name|default:course.teacher.username }}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-weight: 600; color: #666; font-size: 14px;">Enrolled Students</label>
+                        <p style="color: #1a1a1a; font-size: 16px; margin: 5px 0;">{{ course.students.count }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="{% url 'my_courses' %}" class="btn_one w-100" style="padding: 12px; display: block; text-align: center;">
+                            View All Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END LESSON DETAIL -->
+{% endblock %}
